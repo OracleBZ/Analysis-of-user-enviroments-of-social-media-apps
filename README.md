@@ -3,6 +3,7 @@
 Setup Instructions
 1. Creating the Virtual Environment
 To isolate project dependencies, create a virtual environment:
+
 python3 -m venv .venv
 
 2. Activating the Virtual Environment
