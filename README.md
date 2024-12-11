@@ -10,7 +10,7 @@ python3 -m venv .venv
 
 Activate the virtual environment with the following command:
 
-source ./.venv/bin/activate
+source .venv/bin/activate
 
 3. Installing Required Libraries
 
