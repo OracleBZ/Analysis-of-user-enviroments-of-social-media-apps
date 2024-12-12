@@ -19,4 +19,5 @@ Install all necessary libraries by running:
 pip3 install -r requirements.txt
 
 4. Running the Prediction Notebook
-Open and execute the customer_churn_prediction_CS210.ipynb Jupyter Notebook cell by cell to train and evaluate the model.
+Open and execute the social_media_analysis.ipynb Jupyter Notebook cell by cell to train and evaluate the model.
+PS: Some cells(commented in notebook) are for show only. Don't run those cells, as they require modules not in the notebook.
