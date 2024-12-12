@@ -1,0 +1,5 @@
+.venv
+*.zip
+*.txt
+real_time_sentiment.db
+social_media_analysis.db
