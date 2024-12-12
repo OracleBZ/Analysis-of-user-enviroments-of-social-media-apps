@@ -133,3 +133,74 @@ print("\nClustering Results (First 5 Rows):")
 print(data[["clean_text", "cluster"]].head())
 
 # Section 5: Algorithm Simulation
+
+# Simulate content recommendation algorithms
+# Define a function to simulate the recommendation algorithm
+def simulate_recommendation_algorithm(data, num_recommendations=10):    
+    #Simulate a recommendation algorithm by randomly selecting posts.
+    return data.sample(num_recommendations)
+
+# Define a function to determine if a post is controversial
+def is_controversial(row, threshold=1.0):
+    #Determine if a post is controversial based on the variance in civility scores.
+    return row['civility_score'] > threshold
+
+# Simulate the recommendation algorithm
+recommended_posts = simulate_recommendation_algorithm(data, num_recommendations=50)
+
+# Analyze the frequency of controversial posts in the recommendations
+recommended_posts['controversial'] = recommended_posts.apply(is_controversial, axis=1)
+controversial_count = recommended_posts['controversial'].sum()
+total_recommendations = len(recommended_posts)
+
+# Calculate the frequency of controversial posts
+controversial_frequency = controversial_count / total_recommendations
+
+# Display the results
+print(f"Total Recommendations: {total_recommendations}")
+print(f"Controversial Posts: {controversial_count}")
+print(f"Frequency of Controversial Posts: {controversial_frequency:.2f}")
+
+# Visualization of the results
+plt.figure(figsize=(10, 6))
+sns.countplot(x='controversial', data=recommended_posts)
+plt.title('Frequency of Controversial Posts in Recommendations')
+plt.xlabel('Controversial')
+plt.ylabel('Count')
+plt.show()
+
+# Section 6: Database Integration
+
+# Database setup
+def setup_database():
+    conn = sqlite3.connect("social_media_analysis.db")
+    cursor = conn.cursor()
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS posts (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            platform TEXT,
+            text TEXT,
+            created_at TEXT,
+            user_id TEXT,
+            sentiment_score REAL,
+            sentiment_label TEXT,
+            cluster INTEGER
+        )
+    """)
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS survey (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id TEXT,
+            platform TEXT,
+            civility_score REAL,
+            usability_score REAL,
+            echo_chamber_perception BOOLEAN,
+            intelligence REAL
+        )
+    """)
+    conn.commit()
+    return conn
+
+# Insert data into the database
+def store_data(conn, dataframe):
+    dataframe.to_sql("posts", conn, if_exists="append", index=False)
