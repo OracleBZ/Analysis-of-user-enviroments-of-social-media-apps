@@ -203,3 +203,28 @@ def setup_database():
 # Insert data into the database
 def store_data(conn, dataframe):
     dataframe.to_sql("posts", conn, if_exists="append", index=False)
+
+# Section 9: Machine Learning: Relationships and Analysis
+
+# Civility and Intelligence
+def analyze_relationships(data):
+    """
+    Use Linear Regression to analyze relationships.
+    """
+    # Civility and Intelligence Relationship
+    X = data[["civility_score"]]
+    y = data["intelligence_score"]
+    
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    model = LinearRegression()
+    model.fit(X_train, y_train)
+    
+    predictions = model.predict(X_test)
+    mse = mean_squared_error(y_test, predictions)
+    r2 = r2_score(y_test, predictions)
+    
+    print(f"Mean Squared Error: {mse:.2f}")
+    print(f"R-squared: {r2:.2f}")
+    return model
+
+relationship_model = analyze_relationships(data)
