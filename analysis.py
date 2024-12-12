@@ -182,8 +182,8 @@ def setup_database():
             text TEXT,
             created_at TEXT,
             user_id TEXT,
-            sentiment_score REAL,
-            sentiment_label TEXT,
+            civility_score REAL,
+            intelligence_score REAL,
             cluster INTEGER
         )
     """)
@@ -195,7 +195,7 @@ def setup_database():
             civility_score REAL,
             usability_score REAL,
             echo_chamber_perception BOOLEAN,
-            intelligence REAL
+            intelligence_score REAL
         )
     """)
     conn.commit()
