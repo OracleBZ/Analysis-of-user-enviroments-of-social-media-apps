@@ -4,12 +4,14 @@ Video Link:
 
 Setup Instructions
 1. Running the Jupyter Notebook(Recommended)
+
 Open and execute the social_media_analysis.ipynb Jupyter Notebook cell by cell to train and evaluate the model.
 
 PS: Some cells(commented in notebook) are for show only. Don't run those cells, as they require modules not in the notebook.
 
 Or
 1. Creating the Virtual Environment
+
 To isolate project dependencies, create a virtual environment:
 
 python3 -m venv .venv
